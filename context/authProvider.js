@@ -73,7 +73,7 @@ export function UserProvider({ children }) {
 
             const redirectUrl = process.env.NODE_ENV === "development"
                 ? "http://localhost:3000/auth/callback"
-                : "https://your-vercel-app.vercel.app/auth/callback"; // UPDATE THIS!
+                : "patient-portal-git-main-vikas-projects-b4f7d72c.vercel.app/auth/callback"; // UPDATE THIS!
 
             const { data, error } = await supabase.auth.signInWithOAuth({
                 provider: "google",
