@@ -14,6 +14,7 @@ export default function Dashboard() {
             await fetchUserDetails();
         };
         fetchData()
+
     }, [])
 
     return (

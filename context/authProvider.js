@@ -18,27 +18,17 @@ export function UserProvider({ children }) {
         console.log(session.user);
 
     }
-
     const signUp = async (fullName, email, password) => {
         try {
             const { data, error } = await supabase.auth.signUp({
                 email,
                 password,
+
             });
-            if (!error) {
-                router.push("/dashboard")
-            }
-            console.log(error);
-
-
-
             await fetchUserDetails();
-
-
             if (!error) {
                 await updatePatientData(email, fullName)
             }
-
 
         } catch (error) {
             console.log(error.message);
@@ -48,33 +38,60 @@ export function UserProvider({ children }) {
         }
     }
 
+
+    // const signInWithGoogle = async () => {
+    //     try {
+    //         console.log("Attempting to sign in with Google...");
+    //         const { data, error } = await supabase.auth.signInWithOAuth({
+    //             provider: "google",
+    //             options: {
+    //                 redirectTo: "http://localhost:3000/dashboard"
+    //             }
+
+
+
+    //         });
+
+    //         await fetchUserDetails();
+    //         if (error) {
+    //             console.error("Google Sign-In Error:", error.message);
+    //             throw new Error(`Google Sign-In Failed: ${error.message}`);
+
+    //         }
+    //         console.log(data);
+
+
+
+    //     } catch (error) {
+    //         throw new Error("error from googleSignUp", error)
+    //     }
+    // }
+
     const signInWithGoogle = async () => {
         try {
             console.log("Attempting to sign in with Google...");
+
+            const redirectUrl = process.env.NODE_ENV === "development"
+                ? "http://localhost:3000/auth/callback"
+                : "https://your-vercel-app.vercel.app/auth/callback"; // UPDATE THIS!
+
             const { data, error } = await supabase.auth.signInWithOAuth({
                 provider: "google",
                 options: {
-                    redirectTo: "http://localhost:3000/dashboard"
-                }
-
-
-
+                    redirectTo: redirectUrl, // Dynamically set redirect URL
+                },
             });
 
-            await fetchUserDetails();
             if (error) {
                 console.error("Google Sign-In Error:", error.message);
                 throw new Error(`Google Sign-In Failed: ${error.message}`);
-
             }
-            console.log(data);
 
-
-
+            console.log("Google Auth Response:", data);
         } catch (error) {
-            throw new Error("error from googleSignUp", error)
+            console.error("Google Sign-Up Error:", error);
         }
-    }
+    };
 
     const loginWithEmailPassword = async (email, password) => {
         const { data, error } = await supabase.auth.signInWithPassword({
