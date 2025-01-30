@@ -53,7 +53,7 @@ export default function SignUp() {
                     <label className="block text-sm font-semibold">Password</label>
                     <input
                         type="password"
-                        placeholder="Enter your password"
+                        placeholder="Enter your password (Minimum lenght 6)"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="w-full px-4 py-2 border rounded-md"

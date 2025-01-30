@@ -25,7 +25,8 @@ export function UserProvider({ children }) {
                 password,
 
             });
-            await fetchUserDetails();
+            // await fetchUserDetails();
+            router.push("/dashboard")
             if (!error) {
                 await updatePatientData(email, fullName)
             }
@@ -73,12 +74,12 @@ export function UserProvider({ children }) {
 
             const redirectUrl = process.env.NODE_ENV === "development"
                 ? "http://localhost:3000/auth/callback"
-                : "https://patient-portal-rho.vercel.app/auth/callback"; // UPDATE THIS!
+                : "https://patient-portal-rho.vercel.app/auth/callback";
 
             const { data, error } = await supabase.auth.signInWithOAuth({
                 provider: "google",
                 options: {
-                    redirectTo: redirectUrl, // Dynamically set redirect URL
+                    redirectTo: redirectUrl,
                 },
             });
 
