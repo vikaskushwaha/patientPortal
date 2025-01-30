@@ -2,20 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+* ::-webkit-scrollbar {
+  width: 0px;
+  display: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* ::-webkit-scrollbar-track {
+  background: #fff;
+  display: none;
+}
+
+* ::-webkit-scrollbar-thumb {
+  background: #fff;
+  display: none;
+}
+
+* ::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+  display: none;
+}
+
+@font-face {
+  font-family: 'Gilroy-Bold';
+  src: url('/resources/fonts/Gilroy-Bold.ttf') format('truetype');
+  font-weight: 400;
+  /* Adjust weight as needed */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy-SemiBold';
+  src: url('/resources/fonts/Gilroy-SemiBold.ttf') format('truetype');
+  font-weight: 400;
+  /* Adjust weight as needed */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy-Regular';
+  src: url('/resources/fonts/Gilroy-Regular.ttf') format('truetype');
+  font-weight: 400;
+  /* Adjust weight as needed */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy-Medium';
+  src: url('/resources/fonts/Gilroy-Medium.ttf') format('truetype');
+  font-weight: 400;
+  /* Adjust weight as needed */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gilroy-BoldItalic';
+  src: url('/resources/fonts/Gilroy-BoldItalic.ttf') format('truetype');
+  font-weight: 400;
+  /* Adjust weight as needed */
+  font-style: normal;
+}
+
+html {
+  font-size: 16px
+}
+
+@layer utilities {
+  .scrollbar-custom {
+    scrollbar-width: 12px;
+    /* For Firefox */
+    scrollbar-color: #292C33 #3A3C43;
+    /* Thumb and track colors */
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #292C33;
+    /* Thumb color */
+    border-radius: 4px;
+    /* Rounded corners */
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: #3A3C43;
+    /* Track color */
+  }
 }
