@@ -1,11 +1,6 @@
 "use client"
-
 import { useContext, useEffect, useState } from "react";
-
 import { Authcontext } from "@/context/authProvider";
-
-
-
 export default function Dashboard() {
     const [user, setUser] = useState(null);
     const { fetchUserDetails, userInfo, isLoggedIn, signOut } = useContext(Authcontext);
@@ -16,9 +11,8 @@ export default function Dashboard() {
         fetchData()
 
     }, [])
-
     return (
-        <div className="flex justify-center items-center h-screen bg-gray-100">
+        <div className="flex justify-center items-center min-w-max bg-gray-100">
             <div className="w-96 bg-white shadow-lg rounded-lg p-6 text-center">
                 {isLoggedIn && userInfo ? (
                     <>
