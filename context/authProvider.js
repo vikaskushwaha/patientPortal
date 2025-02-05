@@ -1,9 +1,11 @@
 'use client'
-import { updatePatientData, insertUserProfile } from "@/dal/patientDal";
+
 import { useContext, createContext, useState, useEffect, Children } from "react"
 export const Authcontext = createContext();
-import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "@/dal/supabaseClient";
 import { useRouter } from "next/navigation";
+import VerifyAndGetDataFromBubble from "@/hooks/verifyDataFrombubble";
+import InsertPatientInfoInSupabase from "@/hooks/insertPatientInfoInsupabase";
 export function UserProvider({ children }) {
     const [userInfo, setuserInfo] = useState(null);
     const [isLoggedIn, setLoggedIn] = useState(false)
@@ -15,58 +17,46 @@ export function UserProvider({ children }) {
         if (session) {
             setuserInfo(session.user);
         }
-        console.log(session.user);
+        return session.user.id
 
     }
+
+
     const signUp = async (fullName, email, password) => {
         try {
-            const { data, error } = await supabase.auth.signUp({
-                email,
-                password,
+            const patientInfo = await VerifyAndGetDataFromBubble(email)
+            if (patientInfo && patientInfo.data.response.count > 0) {
+                const { data, error } = await supabase.auth.signUp({
+                    email,
+                    password,
 
-            });
-            // await fetchUserDetails();
-            router.push("/dashboard")
-            if (!error) {
-                await updatePatientData(email, fullName)
+                });
+                const patientId = await fetchUserDetails();
+                console.log("hi");
+                await InsertPatientInfoInSupabase(patientId, patientInfo)
+
+                router.push("/dashboard")
+
+
+
+
             }
+            else {
+                console.log("you are not registered");
+
+            }
+
+
+
 
         } catch (error) {
             console.log(error.message);
-
             throw new Error("error from signup", error)
 
         }
     }
 
 
-    // const signInWithGoogle = async () => {
-    //     try {
-    //         console.log("Attempting to sign in with Google...");
-    //         const { data, error } = await supabase.auth.signInWithOAuth({
-    //             provider: "google",
-    //             options: {
-    //                 redirectTo: "http://localhost:3000/dashboard"
-    //             }
-
-
-
-    //         });
-
-    //         await fetchUserDetails();
-    //         if (error) {
-    //             console.error("Google Sign-In Error:", error.message);
-    //             throw new Error(`Google Sign-In Failed: ${error.message}`);
-
-    //         }
-    //         console.log(data);
-
-
-
-    //     } catch (error) {
-    //         throw new Error("error from googleSignUp", error)
-    //     }
-    // }
 
     const signInWithGoogle = async () => {
         try {

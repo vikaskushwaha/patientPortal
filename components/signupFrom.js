@@ -1,7 +1,7 @@
 
 "use client"
 import { useContext, useState } from "react";
-import { supabase } from "@/lib/supabaseClient";
+import { supabase } from "@/dal/supabaseClient";
 import { Authcontext } from "@/context/authProvider";
 export default function SignUp() {
     const { signUp, signInWithGoogle, loginWithEmailPassword } = useContext(Authcontext)
