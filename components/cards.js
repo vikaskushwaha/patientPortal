@@ -7,7 +7,7 @@ const Cards = ({ heading, bgColor, title, subtitle }) => {
             </div>
             <div className="flex flex-col gap-y-7 ">
                 <div className="w-52">
-                    <h3 className="font-semibold mb-2 text-lg tracking-wide">{title}</h3>
+                    <h3 className="font-semibold mb-2 text-lg tracking-wider">{title}</h3>
                 </div>
 
                 <div className="flex flex-col gap-y-3 ">

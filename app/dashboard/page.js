@@ -41,67 +41,80 @@
 
 'use client'
 
-import Cards from "@/components/cards"
+// import Cards from "@/components/cards"
+// import PersonalizedPlan from "@/components/personalizedPlan"
+
+// const Home = () => {
+//     return (
+//         <div className="w-full">
+//             {/* <div className="w-full flex flex-col mb-10  py-6"> */}
+//             <div className="  flex flex-col  my-6 mx-10 gap-y-8 py-6">
+//                 <div className=" flex-col gap-x-3 mb-6">
+//                     <div className="flex flex-row justify-start ">
+//                         <p className="text-2xl font-extrabold  tracking-widest">Welcome, Vikas</p>
+//                     </div>
+//                 </div>
+//                 <div className=" flex flex-row  justify-around">
+//                     <Cards heading="Subscriptions and Purchases" title="The 6-12 Month Baby Sleep Guide" subtitle="By Jane Smith" bgColor="bg-green-100" />
+//                     <Cards heading="My Health Topics" title="Expert Articles and Opinions" subtitle="100+ articles in the last 3 months" bgColor="bg-yellow-100" />
+//                     <Cards heading="My Healthcare Solutions" title="Child Sleep Solutions" bgColor="bg-red-100" />
+//                     <Cards heading="My Providers" title="Go To Your Expert Team" bgColor="bg-blue-100" />
+//                 </div>
+
+//                 <PersonalizedPlan />
+
+//             </div>
+//             {/* </div> */}
+//         </div >
+
+//     )
+// }
+
+
+
+import Cards from "@/components/cards";
+import PersonalizedPlan from "@/components/personalizedPlan";
 
 const Home = () => {
     return (
-
         <div className="w-full">
-            <div className="w-full flex flex-col mb-10  py-6">
-                <div className=" w-full flex flex-col  my-6 mx-10 gap-x-8">
-                    <div className="w-full flex-col gap-x-3 mb-6">
-                        <div className="w-full flex flex-row justify-start ">
-                            <p className="text-2xl font-extrabold  tracking-widest">Welcome, Vikas</p>
-                        </div>
+            <div className="flex flex-col my-6 mx-4 md:mx-10 gap-y-8 py-6">
+                <div className="flex flex-col gap-y-3 mb-6">
+                    <div className="flex justify-start">
+                        <p className="text-xl md:text-2xl font-extrabold tracking-widest">Welcome, Vikas</p>
                     </div>
-                    <div className=" flex flex-row gap-x-6 ">
-                        <Cards heading="Subscriptions and Purchases" title="The 6-12 Month Baby Sleep Guide" subtitle="By Jane Smith" bgColor="bg-green-100" />
-                        <Cards heading="My Health Topics" title="Expert Articles and Opinions" subtitle="100+ articles in the last 3 months" bgColor="bg-yellow-100" />
-                        <Cards heading="My Healthcare Solutions" title="Child Sleep Solutions" bgColor="bg-red-100" />
-                        <Cards heading="My Providers" title="Go To Your Expert Team" bgColor="bg-blue-100" />
-                    </div>
-
-                    <div className="w-full p-6 ">
-                        <div className="mb-4">
-                            <p className="font-semibold">Goals</p>
-                            <p className="text-blue-600 underline cursor-pointer">Current page's Personalized Plan's goals</p>
-                        </div>
-
-                        <div className="mb-4">
-                            <h3 className="text-lg font-bold mb-2">My Personalized Plan</h3>
-                            <ul className="list-disc pl-6 text-gray-700">
-                                <li>Current cell's text: split by (#): each item: split by (.)</li>
-                            </ul>
-                        </div>
-
-                        {/* Patient Notes Input */}
-                        <div className="mb-6">
-                            <label htmlFor="patient-notes" className="block text-sm font-medium text-gray-700">
-                                Patient notes:
-                            </label>
-                            <textarea
-                                id="patient-notes"
-                                rows="3"
-                                className="w-full p-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="Type or speak here..."
-                            ></textarea>
-                        </div>
-
-                        {/* Buttons */}
-                        <div className="flex items-center justify-between">
-                            <button className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
-                                Share with my Provider
-                            </button>
-                            <button className="text-blue-600 underline">Update My Plan &gt;&gt;</button>
-                        </div>
-                    </div>
-
-
-
                 </div>
+
+                {/* Grid with all cards on the same row on large screens */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <Cards
+                        heading="Subscriptions and Purchases"
+                        title="The 6-12 Month Baby Sleep Guide"
+                        subtitle="By Jane Smith"
+                        bgColor="bg-green-100"
+                    />
+                    <Cards
+                        heading="My Health Topics"
+                        title="Expert Articles and Opinions"
+                        subtitle="100+ articles in the last 3 months"
+                        bgColor="bg-yellow-100"
+                    />
+                    <Cards
+                        heading="My Healthcare Solutions"
+                        title="Child Sleep Solutions"
+                        bgColor="bg-red-100"
+                    />
+                    <Cards
+                        heading="My Providers"
+                        title="Go To Your Expert Team"
+                        bgColor="bg-blue-100"
+                    />
+                </div>
+
+                <PersonalizedPlan />
             </div>
         </div>
+    );
+};
 
-    )
-}
-export default Home
+export default Home;

@@ -40,7 +40,7 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <div className="flex flex-col bg-white border-b border-gray-200 w-full z-10">
+        <div className="flex flex-col bg-[#D4D4D4] border-b border-gray-200 w-full z-10">
             {/* Desktop and Mobile Navbar */}
             <div className="flex justify-between items-center w-full px-6 py-4 md:px-10">
                 {/* Logo */}
