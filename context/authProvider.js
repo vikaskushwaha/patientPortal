@@ -6,6 +6,8 @@ import { supabase } from "@/dal/supabaseClient";
 import { useRouter } from "next/navigation";
 import VerifyAndGetDataFromBubble from "@/hooks/verifyDataFrombubble";
 import InsertPatientInfoInSupabase from "@/hooks/insertPatientInfoInsupabase";
+import PersonalizedPlan from "@/components/personalizedPlan";
+import fetchPersonalizedPlanOfUser from "@/hooks/personalizePlanofPatientFroBubble";
 export function UserProvider({ children }) {
     const [userInfo, setuserInfo] = useState(null);
     const [isLoggedIn, setLoggedIn] = useState(false)
@@ -21,7 +23,6 @@ export function UserProvider({ children }) {
 
     }
 
-
     const signUp = async (fullName, email, password) => {
         try {
             const patientInfo = await VerifyAndGetDataFromBubble(email)
@@ -31,24 +32,16 @@ export function UserProvider({ children }) {
                     password,
 
                 });
-                const patientId = await fetchUserDetails();
-                console.log("hi");
+                const patientId = await fetchUserDetails(); // for getting uid from  auth.user table 
+                const patient_idFromBubble = patientInfo.data.response.results[0]._id
                 await InsertPatientInfoInSupabase(patientId, patientInfo)
-
+                await fetchPersonalizedPlanOfUser(patient_idFromBubble, email)
                 router.push("/dashboard")
-
-
-
-
             }
             else {
                 console.log("you are not registered");
 
             }
-
-
-
-
         } catch (error) {
             console.log(error.message);
             throw new Error("error from signup", error)

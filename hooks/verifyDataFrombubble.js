@@ -1,8 +1,6 @@
 import axios from 'axios';
-
 const VerifyAndGetDataFromBubble = async (email) => {
     try {
-        // URL-encode the constraints object for the API
         const constraints = JSON.stringify([
             {
                 key: "email",

@@ -3,14 +3,9 @@ import { supabase } from "@/dal/supabaseClient";
 
 
 const InsertPatientInfoInSupabase = async (patientId, patientInfo) => {
-    console.log("data inserting-----");
 
     try {
-
         const jsonData = typeof patientInfo.json === "function" ? await patientInfo.json() : patientInfo;
-
-        console.log("results", jsonData.data.response.results[0]);
-
         const patients = jsonData.data.response.results.map(patient => ({
             id: patientId,
             Modified_Date: patient["Modified Date"],
@@ -28,9 +23,6 @@ const InsertPatientInfoInSupabase = async (patientId, patientInfo) => {
             status: patient.status,
             _id: patient._id
         }));
-
-        console.log("Hi");
-
         const { data, error } = await supabase
             .from('Patient_info')
             .insert(patients)
@@ -46,5 +38,4 @@ const InsertPatientInfoInSupabase = async (patientId, patientInfo) => {
         console.error("Error inserting patient info:", err);
     }
 };
-
 export default InsertPatientInfoInSupabase
