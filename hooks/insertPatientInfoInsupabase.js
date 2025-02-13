@@ -1,4 +1,4 @@
-import { supabase } from "@/dal/supabaseClient";
+import { supabase } from "@/util/supabse/supabaseClient";
 
 
 

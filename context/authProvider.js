@@ -1,27 +1,39 @@
 'use client'
-
 import { useContext, createContext, useState, useEffect, Children } from "react"
 export const Authcontext = createContext();
-import { supabase } from "@/dal/supabaseClient";
+import { supabase } from "@/util/supabse/supabaseClient";
 import { useRouter } from "next/navigation";
 import VerifyAndGetDataFromBubble from "@/hooks/verifyDataFrombubble";
 import InsertPatientInfoInSupabase from "@/hooks/insertPatientInfoInsupabase";
 import PersonalizedPlan from "@/components/personalizedPlan";
 import fetchPersonalizedPlanOfUser from "@/hooks/personalizePlanofPatientFroBubble";
+import fetchPersonalizedPlanOfUserFromsupabase from "@/hooks/fetchcurrentPersonalizedPlanFormSupabse";
+
 export function UserProvider({ children }) {
     const [userInfo, setuserInfo] = useState(null);
     const [isLoggedIn, setLoggedIn] = useState(false)
-
+    const [createPlan, setCreatePlan] = useState(0);
+    const [currentPlan, setCurrentPlan] = useState(null)
     const router = useRouter();
+
     const fetchUserDetails = async () => {
-        setLoggedIn(true)
         const { data: { session } } = await supabase.auth.getSession();
         if (session) {
+            console.log(session.user);
+
             setuserInfo(session.user);
+            setLoggedIn(true)
         }
         return session.user.id
-
     }
+
+    // useEffect(() => {
+    //     if (isLoggedIn) {
+    //         const plan = fetchPersonalizedPlanOfUserFromsupabase()
+    //     }
+
+    // }, [createPlan])
+
 
     const signUp = async (fullName, email, password) => {
         try {
@@ -32,11 +44,12 @@ export function UserProvider({ children }) {
                     password,
 
                 });
-                const patientId = await fetchUserDetails(); // for getting uid from  auth.user table 
+                const patientId = await fetchUserDetails();
                 const patient_idFromBubble = patientInfo.data.response.results[0]._id
                 await InsertPatientInfoInSupabase(patientId, patientInfo)
                 await fetchPersonalizedPlanOfUser(patient_idFromBubble, email)
-                router.push("/dashboard")
+                if (setLoggedIn) router.push("/dashboard")
+                else router.push("/")
             }
             else {
                 console.log("you are not registered");
@@ -48,8 +61,6 @@ export function UserProvider({ children }) {
 
         }
     }
-
-
 
     const signInWithGoogle = async () => {
         try {
@@ -77,13 +88,14 @@ export function UserProvider({ children }) {
         }
     };
 
+
     const loginWithEmailPassword = async (email, password) => {
         const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password,
         })
         if (!error) {
-            setLoggedIn('true')
+            setLoggedIn(true)
             router.push("/dashboard")
 
         }

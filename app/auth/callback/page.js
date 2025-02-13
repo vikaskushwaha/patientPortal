@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "@/dal/supabaseClient";
+import { supabase } from "@/util/supabse/supabaseClient";
 import { Authcontext } from "@/context/authProvider";
 
 export default function AuthCallback() {

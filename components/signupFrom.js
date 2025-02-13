@@ -1,7 +1,7 @@
 
 "use client"
 import { useContext, useState } from "react";
-import { supabase } from "@/dal/supabaseClient";
+import { supabase } from "@/util/supabse/supabaseClient";
 import { Authcontext } from "@/context/authProvider";
 export default function SignUp() {
     const { signUp, signInWithGoogle, loginWithEmailPassword } = useContext(Authcontext)
@@ -70,14 +70,14 @@ export default function SignUp() {
 
             </form>
 
-            <div className="mt-4 text-center">
+            {/* <div className="mt-4 text-center">
                 <button
                     onClick={handleGoogleSignUp}
                     className="w-full bg-red-500 text-white py-2 rounded-md"
                 >
                     Sign Up with Google
                 </button>
-            </div>
+            </div> */}
             {login && (<div className="mt-4 text-center">
                 <div onClick={() => setLogin(false)}>Create an Account</div>
             </div>)}

@@ -1,4 +1,4 @@
-import { supabase } from "@/dal/supabaseClient";
+import { supabase } from "@/util/supabse/supabaseClient";
 
 const searchAndInsertInsupabsePersonalizedPlan = async (_id, email, personalizedPlan) => {
     console.log("hi for search");

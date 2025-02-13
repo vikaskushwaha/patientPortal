@@ -1,10 +1,8 @@
-
 'use client'
 
-import Cards from "@/components/cards";
-import PersonalizedPlan from "@/components/personalizedPlan";
+import Cards from "@/components/cards"
 
-const Home = () => {
+const CurrentPatientPlan = () => {
     return (
         <div className="w-full">
             <div className="flex flex-col my-6 mx-4 md:mx-10 gap-y-8 py-6">
@@ -39,11 +37,9 @@ const Home = () => {
                         bgColor="bg-blue-100"
                     />
                 </div>
-
-                <PersonalizedPlan />
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Home;
+export default CurrentPatientPlan
